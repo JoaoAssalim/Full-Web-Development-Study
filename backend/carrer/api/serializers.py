@@ -1,6 +1,6 @@
 import os
-from carrer.models import Carrers
 from rest_framework import serializers
+from backend.carrer.models import Carrers
 
 class CarrerSerializer(serializers.ModelSerializer):
     class Meta:

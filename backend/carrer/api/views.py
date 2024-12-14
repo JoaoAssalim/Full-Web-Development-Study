@@ -12,8 +12,8 @@ from rest_framework.generics import GenericAPIView, CreateAPIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 
-from carrer.models import Carrers
-from carrer.api.serializers import CarrerSerializer, CarrerFileSerializer, LoginUserSerializer
+from backend.carrer.models import Carrers
+from backend.carrer.api.serializers import CarrerSerializer, CarrerFileSerializer, LoginUserSerializer
 
 
 class CarrerViewSet(ModelViewSet):

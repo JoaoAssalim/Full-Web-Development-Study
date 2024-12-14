@@ -19,7 +19,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'rest_framework_simplejwt',
-    'carrer'
+    'backednd.carrer'
 ]
 
 MIDDLEWARE = [

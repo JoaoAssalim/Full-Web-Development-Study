@@ -5,7 +5,7 @@ from drf_yasg.views import get_schema_view
 from django.urls import re_path, include, path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
-from carrer.api.views import UserLogin
+from backend.carrer.api.views import UserLogin
 
 
 schema_view = get_schema_view(

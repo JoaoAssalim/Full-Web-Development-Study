@@ -1,8 +1,8 @@
-from rest_framework.test import APITestCase, APIClient
-from rest_framework import status
-from django.urls import reverse
 from .models import Carrers
-from carrer.api.serializers import CarrerSerializer
+from django.urls import reverse
+from rest_framework import status
+from rest_framework.test import APITestCase, APIClient
+from backend.carrer.api.serializers import CarrerSerializer
 
 class CarrerViewSetTestCase(APITestCase):
     def setUp(self):
