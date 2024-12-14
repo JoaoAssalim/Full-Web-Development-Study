@@ -1,0 +1,5 @@
+django
+djangorestframework
+drf-yasg
+pandas
+djangorestframework-simplejwt
