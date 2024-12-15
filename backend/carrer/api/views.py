@@ -59,7 +59,7 @@ class CarrerFileUpload(GenericAPIView):
         fs = FileSystemStorage(location=f"{os.getcwd()}/media/files")
         file = fs.save(file.name, file)
 
-        file_upload = CarrerSpreadsheetUpload(file).upload_file()
+        CarrerSpreadsheetUpload(file).upload_file()
         
         fs.delete(file)
         
