@@ -4,3 +4,4 @@ drf-yasg
 pandas
 djangorestframework-simplejwt
 openpyxl
+django-cors-headers
