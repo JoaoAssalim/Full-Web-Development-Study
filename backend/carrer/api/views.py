@@ -1,18 +1,18 @@
 import os
-import pandas as pd
 
-from django.db import transaction
 from rest_framework import parsers
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from django.contrib.auth import authenticate, login
 from rest_framework.exceptions import ValidationError
+from django.core.files.storage import FileSystemStorage
 from rest_framework.generics import GenericAPIView, CreateAPIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 
 from backend.carrer.models import Carrers
+from backend.carrer.services.file_loaders import CarrerSpreadsheetUpload
 from backend.carrer.api.serializers import CarrerSerializer, CarrerFileSerializer, LoginUserSerializer
 
 
@@ -51,51 +51,23 @@ class CarrerFileUpload(GenericAPIView):
         parsers.FileUploadParser,
     )
 
-    def read_file(self, file):
-        try:
-            if file.name.split(".")[-1] == "xlsx":
-                df = pd.read_excel(file, index_col=False)
-            else:
-                df = pd.read_csv(file, index_col=False)
-        except Exception as e:
-            raise ValidationError(f"Error reading file: {str(e)}")
-
-        required_columns = {"username", "title", "content"}
-        if not required_columns.issubset(df.columns):
-            raise ValidationError(
-                "The file must contain the columns: username, title, and content."
-            )
-
-        data = [
-            {
-                "username": row[1]["username"],
-                "title": row[1]["title"],
-                "content": row[1]["content"],
-            }
-            for row in df.iterrows()
-        ]
-
-        return data
-
     def post(self, request, *args, **kwargs):
 
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        os.makedirs(f"{os.getcwd()}/media/files", exist_ok=True)
+        
+        file = request.data["file"]
+        fs = FileSystemStorage(location=f"{os.getcwd()}/media/files")
+        file = fs.save(file.name, file)
 
-        file = serializer.validated_data["file"]
-
-        data = self.read_file(file)
-
-        with transaction.atomic():  # previne quen não sejam feitas alterações parciais no bd
-            carrer_serializer = CarrerSerializer(data=data, many=True)
-            carrer_serializer.is_valid(raise_exception=True)
-            carrer_serializer.save()
-
+        file_upload = CarrerSpreadsheetUpload(file).upload_file()
+        
+        fs.delete(file)
+        
         return Response(
             {
-                "message": "File uploaded and data saved successfully.",
-                "uploaded_rows": len(data),
-            }
+                "message": "File was uploaded with success.",
+            },
+            status=201
         )
 
 

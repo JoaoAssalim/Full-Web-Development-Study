@@ -89,11 +89,6 @@ SIMPLE_JWT = {
     'AUTH_TOKEN_CLASSES': ['rest_framework_simplejwt.tokens.AccessToken'],
 }
 
-CELERY_BROKER_URL  = os.getenv("CELERY_BROKER_URL")
-CELERY_TASK_TRACK_STARTED = True
-CELERY_TASK_TIME_LIMIT = 30 * 60
-CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
