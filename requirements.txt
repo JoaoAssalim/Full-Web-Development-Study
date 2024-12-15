@@ -3,3 +3,6 @@ djangorestframework
 drf-yasg
 pandas
 djangorestframework-simplejwt
+redis 
+celery 
+django-celery-beat

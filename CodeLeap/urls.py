@@ -33,5 +33,5 @@ urlpatterns = [
    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 
    path("login", UserLogin.as_view(), name="login"),
-   path('carrers/', include('carrer.api.urls')),
+   path('carrers/', include('backend.carrer.api.urls')),
 ]
