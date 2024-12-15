@@ -36,7 +36,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'CodeLeap.urls'
+ROOT_URLCONF = 'WebSystem.urls'
 
 TEMPLATES = [
     {
@@ -54,7 +54,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'CodeLeap.wsgi.application'
+WSGI_APPLICATION = 'WebSystem.wsgi.application'
 
 DATABASES = {
     'default': {

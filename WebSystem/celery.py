@@ -1,9 +1,9 @@
 import os
 from celery import Celery
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CodeLeap.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'WebSystem.settings')
 
-app = Celery('CodeLeap')
+app = Celery('WebSystem')
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
