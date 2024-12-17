@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from backend.carrer.api.views import CarrerViewSet, CarrerFileUpload
 
 router = DefaultRouter()
-router.register(r'carrer', CarrerViewSet, basename='carrer')
+router.register(r'', CarrerViewSet, basename='carrer')
 
 urlpatterns = [
     path("", include(router.urls)),

@@ -3,13 +3,11 @@ import os
 from rest_framework import parsers
 from django.contrib.auth.models import User
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import ModelViewSet
 from django.contrib.auth import authenticate, login
-from rest_framework.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
 from rest_framework.generics import GenericAPIView, CreateAPIView
-from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 
 from backend.carrer.models import Carrers
 from backend.carrer.services.file_loaders import CarrerSpreadsheetUpload
