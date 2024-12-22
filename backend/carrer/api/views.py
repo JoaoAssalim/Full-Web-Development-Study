@@ -1,5 +1,6 @@
 import os
 
+from django.conf import settings
 from rest_framework import parsers
 from django.contrib.auth.models import User
 from rest_framework.response import Response
@@ -12,6 +13,8 @@ from rest_framework.generics import GenericAPIView, CreateAPIView
 from backend.carrer.models import Carrers
 from backend.carrer.services.file_loaders import CarrerSpreadsheetUpload
 from backend.carrer.api.serializers import CarrerSerializer, CarrerFileSerializer, LoginUserSerializer
+
+MEDIA_PATH = settings.MEDIA_PATH
 
 
 class CarrerViewSet(ModelViewSet):
@@ -51,10 +54,10 @@ class CarrerFileUpload(GenericAPIView):
 
     def post(self, request, *args, **kwargs):
 
-        os.makedirs(f"{os.getcwd()}/media/files", exist_ok=True)
+        os.makedirs(MEDIA_PATH, exist_ok=True)
         
         file = request.data["file"]
-        fs = FileSystemStorage(location=f"{os.getcwd()}/media/files")
+        fs = FileSystemStorage(location=MEDIA_PATH)
         file = fs.save(file.name, file)
 
         CarrerSpreadsheetUpload(file).upload_file()
